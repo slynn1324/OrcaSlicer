@@ -3,12 +3,12 @@ name: Build OrcaSlicer
 on: 
   workflow_call:
     inputs:
-      cache-key:
-        required: true
-        type: string
-      cache-path:
-        required: true
-        type: string
+      # cache-key:
+      #   required: true
+      #   type: string
+      # cache-path:
+      #   required: true
+      #   type: string
       os:
         required: true
         type: string
