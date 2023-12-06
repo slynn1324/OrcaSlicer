@@ -1,27 +1,42 @@
 name: Build OrcaSlicer
 
 on: 
-    push:
-      branches: 
-       - main
-       - release/*
-      paths:
-       - 'src/**'
-       - '**/CMakeLists.txt'
-       - 'version.inc'
-       - 'localization/**'
-       - 'resources/**'
-       - ".github/workflows/build_orca.yml"
+  workflow_call:
+    inputs:
+      cache-key:
+        required: true
+        type: string
+      cache-path:
+        required: true
+        type: string
+      os:
+        required: true
+        type: string
+      arch:
+        required: false
+        type: string
+        
+    # push:
+    #   branches: 
+    #    - main
+    #    - release/*
+    #   paths:
+    #    - 'src/**'
+    #    - '**/CMakeLists.txt'
+    #    - 'version.inc'
+    #    - 'localization/**'
+    #    - 'resources/**'
+    #    - ".github/workflows/build_orca.yml"
 
-    pull_request:
-      branches: 
-       - main 
-       - release/*
-      paths:
-       - 'src/**'
-       - '**/CMakeLists.txt'
-       - 'version.inc'
-       - ".github/workflows/build_orca.yml"
+    # pull_request:
+    #   branches: 
+    #    - main 
+    #    - release/*
+    #   paths:
+    #    - 'src/**'
+    #    - '**/CMakeLists.txt'
+    #    - 'version.inc'
+    #    - ".github/workflows/build_orca.yml"
  
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
