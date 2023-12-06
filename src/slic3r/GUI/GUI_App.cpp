@@ -1962,6 +1962,18 @@ void GUI_App::init_networking_callbacks()
                         GUI::wxGetApp().sidebar().load_ams_list(obj->dev_id, obj);
                     }
                 }
+
+                // SL: echo received mqtt message body as http post/webook
+                // considered mqtt here, but would need to add a mqtt library that isn't embedded in the
+                // closed-source bambu network libraries.  An HTTP Client is already present 
+                // as part of libslic3r/utils.  
+                std::string bambu_status_webhook_url = app_config->get("bambu_status_webhook_url");
+                if ( bambu_status_webhook_url.length() > 0 ){
+                    Slic3r::Http bambuStatusWebhookPost = Slic3r::Http::post(bambu_status_webhook_url);
+                    bambuStatusWebhookPost.header("dev_id", dev_id);
+                    bambuStatusWebhookPost.set_post_body(msg);
+                    bambuStatusWebhookPost.perform();
+                }
                 });
         };
         m_agent->set_on_local_message_fn(lan_message_arrive_fn);
