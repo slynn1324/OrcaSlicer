@@ -9,12 +9,12 @@ on:
       # cache-path:
       #   required: true
       #   type: string
-      os:
-        required: true
-        type: string
-      arch:
-        required: false
-        type: string
+      # os:
+      #   required: true
+      #   type: string
+      # arch:
+      #   required: false
+      #   type: string
         
     # push:
     #   branches: 
